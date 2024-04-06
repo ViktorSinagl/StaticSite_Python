@@ -40,7 +40,7 @@ class LeafNode(HTMLNode):
             return ret_string
         elif self.tag == "a":
             if self.props == {} or self.props is None:
-                raise ValueError("link tag (a) with property emtpy or null!")
+                raise ValueError("link tag (a) with property empty or null!")
             elif 'target' in self.props and self.props['target'] is not None:
                 ret_string = f"<{self.tag} href=\"{self.props['href']}\" target=\"{self.props['target']}\">{self.value}</{self.tag}>"
                 ret_string = (indent * " ") + ret_string
