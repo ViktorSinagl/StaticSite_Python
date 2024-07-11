@@ -1,4 +1,3 @@
-
 class HTMLNode:
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
@@ -8,8 +7,8 @@ class HTMLNode:
 
     def __eq__(self, other):
         if (self.tag == other.tag and
-            self.value == other.value and
-            self.children == other.children and
+                self.value == other.value and
+                self.children == other.children and
                 self.props == other.props):
             return True
         return False
@@ -21,7 +20,7 @@ class HTMLNode:
         raise NotImplementedError
 
     def props_to_html(self):
-        if (self.props is None):
+        if self.props is None:
             return ""
         else:
             return f"href=\"{self.props['href']}\" target=\"{self.props['target']}\""
@@ -32,7 +31,6 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
 
     def to_html(self, indent=0):
-        #ret_string = ""
         if self.value is None:
             raise ValueError("value = None error")
         if self.tag is None:
@@ -46,23 +44,21 @@ class LeafNode(HTMLNode):
                 ret_string = (indent * " ") + ret_string
                 return ret_string
             else:
-                ret_string =  f"<{self.tag} href=\"{self.props['href']}\">{self.value}</{self.tag}>"
+                ret_string = f"<{self.tag} href=\"{self.props['href']}\">{self.value}</{self.tag}>"
                 ret_string = (indent * " ") + ret_string
                 return ret_string
-        ret_string =  f"<{self.tag}>{self.value}</{self.tag}>"
+        ret_string = f"<{self.tag}>{self.value}</{self.tag}>"
         ret_string = (indent * " ") + ret_string
         return ret_string
 
-#html.append("\t" + ("\n\t".join(html_inner)))
 
 class ParentNode(HTMLNode):
-
     def __init__(self, tag, children, props=None):
         super().__init__(tag, None, children, props)
 
     def to_html(self, indent=0):
-        if self.tag is None:
-            raise ValueError("error in to_html() -> tag not provided!")
+        # if self.tag is None:
+        #     raise ValueError("error in to_html() -> tag not provided!")
         if self.children is None:
             raise ValueError("error ParrentNode class -> self.children is None")
         html = []
